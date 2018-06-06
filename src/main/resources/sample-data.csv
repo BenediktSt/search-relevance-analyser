@@ -1,5 +1,6 @@
-Koch,test,url1
-Kind,test,url3
-Arbeit,test,url2
-Geld,test,url4
-Koch,test,url5
+searchTerm,rank,result
+Koch,2,url1
+Kind,3,url3
+Arbeit,1,url2
+Geld,1,url4
+Koch,1,url5

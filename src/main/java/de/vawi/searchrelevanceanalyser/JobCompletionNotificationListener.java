@@ -31,7 +31,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
                     (rs, row) -> new RelevanceEntry(
                             rs.getString(1),
                             rs.getString(2),
-                            rs.getString(3))
+                            rs.getInt(3))
             ).forEach(entry -> log.info("Found <" + entry + "> in the database."));
         }
     }

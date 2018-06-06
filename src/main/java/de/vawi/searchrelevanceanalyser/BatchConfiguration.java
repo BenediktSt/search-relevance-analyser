@@ -36,8 +36,9 @@ public class BatchConfiguration {
         return new FlatFileItemReaderBuilder<RelevanceEntry>()
                 .name("relevanceEntryReader")
                 .resource(new ClassPathResource("sample-data.csv"))
+                .linesToSkip(1)
                 .delimited()
-                .names(new String[]{"searchTerm", "result", "rank"})
+                .names(new String[]{"searchTerm", "rank", "result"})
                 .fieldSetMapper(new BeanWrapperFieldSetMapper<RelevanceEntry>() {{
                     setTargetType(RelevanceEntry.class);
                 }})

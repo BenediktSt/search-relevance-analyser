@@ -3,11 +3,11 @@ package de.vawi.model;
 public class RelevanceEntry {
     private String searchTerm;
     private String result;
-    private String rank;
+    private int rank;
 
     public RelevanceEntry() {}
 
-    public RelevanceEntry(String searchTerm, String result, String rank) {
+    public RelevanceEntry(String searchTerm, String result, int rank) {
         this.searchTerm = searchTerm;
         this.result = result;
         this.rank = rank;
@@ -29,16 +29,16 @@ public class RelevanceEntry {
         this.result = result;
     }
 
-    public String getRank() {
+    public int getRank() {
         return rank;
     }
 
-    public void setRank(String rank) {
+    public void setRank(int rank) {
         this.rank = rank;
     }
 
     @Override
     public String toString() {
-        return searchTerm + " - " + rank + ": " + result;
+        return searchTerm + " - Rang " + rank + ": " + result;
     }
 }
