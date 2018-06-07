@@ -1,9 +1,16 @@
-package de.vawi.model;
+package de.vawi.searchrelevanceanalyser.model;
 
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+
+@Table
 public class RelevanceEntry {
     private String searchTerm;
     private String result;
     private int rank;
+
+    @PrimaryKey
+    private int id;
 
     public RelevanceEntry() {}
 
@@ -35,6 +42,14 @@ public class RelevanceEntry {
 
     public void setRank(int rank) {
         this.rank = rank;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

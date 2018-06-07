@@ -1,6 +1,6 @@
 package de.vawi.searchrelevanceanalyser;
 
-import de.vawi.model.RelevanceEntry;
+import de.vawi.searchrelevanceanalyser.model.RelevanceEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;

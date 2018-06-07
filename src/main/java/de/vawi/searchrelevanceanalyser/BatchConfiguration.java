@@ -2,8 +2,8 @@ package de.vawi.searchrelevanceanalyser;
 
 import javax.sql.DataSource;
 
-import de.vawi.model.RelevanceEntry;
-import de.vawi.processor.RelevanceEntryProcessor;
+import de.vawi.searchrelevanceanalyser.model.RelevanceEntry;
+import de.vawi.searchrelevanceanalyser.processor.RelevanceEntryProcessor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
