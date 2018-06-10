@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RelevanceEntryRepository extends CassandraRepository<RelevanceEntry, String> {
-    @Query("SELECT max(id) FROM entries")
+    @Query("SELECT max(id) FROM relevanceentry")
     public int findHighestId();
+
+    @Query("SELECT count(id) FROM relevanceentry")
+    public int getToalCount();
 }
