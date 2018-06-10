@@ -12,11 +12,11 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-public class CsvImporter {
+public class CsvDeserializer {
 
-    private static final Logger logger = LoggerFactory.getLogger(CsvImporter.class);
+    private static final Logger logger = LoggerFactory.getLogger(CsvDeserializer.class);
 
-    public CsvImporter() {}
+    public CsvDeserializer() {}
 
     public List<RelevanceEntry> readData (String fileName) {
         try {
