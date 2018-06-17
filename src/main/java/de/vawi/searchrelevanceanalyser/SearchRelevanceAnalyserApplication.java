@@ -1,5 +1,6 @@
 package de.vawi.searchrelevanceanalyser;
 
+import de.vawi.searchrelevanceanalyser.analyser.AverageAnalyser;
 import de.vawi.searchrelevanceanalyser.dao.CassandraSerializer;
 import de.vawi.searchrelevanceanalyser.dao.CsvDeserializer;
 import de.vawi.searchrelevanceanalyser.dao.RelevanceEntryRepository;
@@ -10,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication()
@@ -30,14 +32,18 @@ public class SearchRelevanceAnalyserApplication implements CommandLineRunner {
         CassandraSerializer serializer = new CassandraSerializer(relevanceEntryRepository);
 
         List<RelevanceEntry> entryList = importer.readData("sample-data.csv");
+
+        List<RelevanceEntry> saveList = new ArrayList<>();
+
         entryList.forEach(entry -> {
             try {
-                entry = processor.process(entry);
+                saveList.add(processor.process(entry));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-        serializer.serialize(entryList);
-
+        // serializer.serialize(saveList);
+        AverageAnalyser average = new AverageAnalyser(saveList);
+        System.out.println(average.getAverageValues());
     }
 }
