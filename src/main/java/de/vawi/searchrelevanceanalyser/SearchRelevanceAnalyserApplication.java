@@ -3,9 +3,9 @@ package de.vawi.searchrelevanceanalyser;
 import de.vawi.searchrelevanceanalyser.analyser.AverageAnalyser;
 import de.vawi.searchrelevanceanalyser.dao.CassandraSerializer;
 import de.vawi.searchrelevanceanalyser.dao.CsvDeserializer;
-import de.vawi.searchrelevanceanalyser.dao.RelevanceEntryRepository;
-import de.vawi.searchrelevanceanalyser.model.RelevanceEntry;
-import de.vawi.searchrelevanceanalyser.processor.RelevanceEntryProcessor;
+import de.vawi.searchrelevanceanalyser.dao.TrackingEntryRepository;
+import de.vawi.searchrelevanceanalyser.model.TrackingEntry;
+import de.vawi.searchrelevanceanalyser.processor.TrackingEntryProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +18,7 @@ import java.util.List;
 public class SearchRelevanceAnalyserApplication implements CommandLineRunner {
 
     @Autowired
-    private RelevanceEntryRepository relevanceEntryRepository;
+    private TrackingEntryRepository trackingEntryRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SearchRelevanceAnalyserApplication.class, args);
@@ -28,12 +28,12 @@ public class SearchRelevanceAnalyserApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         CsvDeserializer importer = new CsvDeserializer();
-        RelevanceEntryProcessor processor = new RelevanceEntryProcessor();
-        CassandraSerializer serializer = new CassandraSerializer(relevanceEntryRepository);
+        TrackingEntryProcessor processor = new TrackingEntryProcessor();
+        CassandraSerializer serializer = new CassandraSerializer(trackingEntryRepository);
 
-        List<RelevanceEntry> entryList = importer.readData("sample-data.csv");
+        List<TrackingEntry> entryList = importer.readData("sample-data.csv");
 
-        List<RelevanceEntry> saveList = new ArrayList<>();
+        List<TrackingEntry> saveList = new ArrayList<>();
 
         entryList.forEach(entry -> {
             try {

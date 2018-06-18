@@ -4,7 +4,7 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 @Table
-public class RelevanceEntry {
+public class TrackingEntry {
     private String searchTerm;
     private String result;
     private int rank;
@@ -12,9 +12,9 @@ public class RelevanceEntry {
     @PrimaryKey
     private int id;
 
-    public RelevanceEntry() {}
+    public TrackingEntry() {}
 
-    public RelevanceEntry(String searchTerm, String result, int rank) {
+    public TrackingEntry(String searchTerm, String result, int rank) {
         this.searchTerm = searchTerm;
         this.result = result;
         this.rank = rank;
