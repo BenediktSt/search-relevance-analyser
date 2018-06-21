@@ -31,7 +31,7 @@ public class SearchRelevanceAnalyserApplication implements CommandLineRunner {
         TrackingEntryProcessor processor = new TrackingEntryProcessor();
         CassandraSerializer serializer = new CassandraSerializer(trackingEntryRepository);
 
-        List<TrackingEntry> entryList = importer.readData("sample-data.csv");
+        List<TrackingEntry> entryList = importer.readData("sample-data-piwik.csv");
 
         List<TrackingEntry> saveList = new ArrayList<>();
 
