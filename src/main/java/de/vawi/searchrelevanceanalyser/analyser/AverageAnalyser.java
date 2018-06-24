@@ -4,6 +4,7 @@ import de.vawi.searchrelevanceanalyser.model.TrackingEntry;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class AverageAnalyser {
@@ -22,10 +23,11 @@ public class AverageAnalyser {
     private void generateAverageMap() {
         long total = relevanceEntries.size();
 
-        this.averageValues = relevanceEntries
+        this.averageValues = new TreeMap<>(relevanceEntries
                 .stream()
                 .collect(Collectors.groupingBy(
                         TrackingEntry::getRank,
-                        Collectors.collectingAndThen(Collectors.summingDouble(x -> 1), x -> x/total)));
+                        Collectors.collectingAndThen(Collectors.summingDouble(x -> 1), x -> x/total))));
+
     }
 }
