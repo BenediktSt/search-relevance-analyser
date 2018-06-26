@@ -5,28 +5,27 @@ import de.vawi.searchrelevanceanalyser.model.TrackingEntry;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class AverageAnalyser {
-    private List<TrackingEntry> relevanceEntries;
+    private List<TrackingEntry> trackingEntries;
     private List<StatisticalEntry> averageValues;
 
-    public AverageAnalyser(List<TrackingEntry> relevanceEntries) {
-        this.relevanceEntries = relevanceEntries;
+    public AverageAnalyser(List<TrackingEntry> trackingEntries) {
+        this.trackingEntries = trackingEntries;
         this.averageValues = new ArrayList<>();
-        this.generateAverageMap();
+        this.calculateDistribution();
     }
 
     public List<StatisticalEntry> getAverageValues() {
         return averageValues;
     }
 
-    private void generateAverageMap() {
-        long total = relevanceEntries.size();
+    private void calculateDistribution() {
+        long total = trackingEntries.size();
 
-        new TreeMap<>(relevanceEntries
+        new TreeMap<>(trackingEntries
                 .stream()
                 .collect(Collectors.groupingBy(
                         TrackingEntry::getRank,
