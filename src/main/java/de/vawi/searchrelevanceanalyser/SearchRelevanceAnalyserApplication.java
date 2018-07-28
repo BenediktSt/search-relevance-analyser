@@ -2,6 +2,7 @@ package de.vawi.searchrelevanceanalyser;
 
 import de.vawi.searchrelevanceanalyser.analyser.AverageAnalyser;
 import de.vawi.searchrelevanceanalyser.analyser.KlickAnalyser;
+import de.vawi.searchrelevanceanalyser.analyser.RelevanceAnalyser;
 import de.vawi.searchrelevanceanalyser.dao.CassandraSerializer;
 import de.vawi.searchrelevanceanalyser.dao.CsvDeserializer;
 import de.vawi.searchrelevanceanalyser.dao.TrackingEntryRepository;
@@ -48,5 +49,16 @@ public class SearchRelevanceAnalyserApplication implements CommandLineRunner {
         System.out.println(average.getAverageValues());
         KlickAnalyser statistics = new KlickAnalyser(saveList);
         System.out.println(statistics.getSearchTermValues());
+
+        statistics.getSearchTermValues().forEach((term, values) -> {
+            List<Integer> relevantRanks = RelevanceAnalyser.getRelevantRanksForTerm(values, average.getAverageValues());
+            if (relevantRanks.size() > 0) {
+                System.out.print(term + ": ");
+                relevantRanks.forEach(rank -> {
+                    System.out.print(rank + ", ");
+                });
+                System.out.println();
+            }
+        });
     }
 }
