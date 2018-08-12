@@ -47,6 +47,7 @@ public class SearchRelevanceAnalyserApplication implements CommandLineRunner {
         // serializer.serialize(saveList);
         AverageAnalyser average = new AverageAnalyser(saveList);
         System.out.println(average.getAverageValues());
+
         KlickAnalyser statistics = new KlickAnalyser(saveList);
         System.out.println(statistics.getSearchTermValues());
 

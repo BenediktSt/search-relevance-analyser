@@ -8,16 +8,18 @@ public class TrackingEntry {
     private String searchTerm;
     private String result;
     private int rank;
+    private int count;
 
     @PrimaryKey
     private int id;
 
     public TrackingEntry() {}
 
-    public TrackingEntry(String searchTerm, String result, int rank) {
+    public TrackingEntry(String searchTerm, String result, int rank, int count) {
         this.searchTerm = searchTerm;
         this.result = result;
         this.rank = rank;
+        this.count = count;
     }
 
     public String getSearchTerm() {
@@ -50,6 +52,14 @@ public class TrackingEntry {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     @Override

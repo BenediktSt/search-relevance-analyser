@@ -12,7 +12,7 @@ public class TrackingEntryProcessor {
         final String searchTerm = trackingEntry.getSearchTerm().toLowerCase();
         final String result = trackingEntry.getResult().toLowerCase();
 
-        final TrackingEntry transformedEntry = new TrackingEntry(searchTerm, result, trackingEntry.getRank());
+        final TrackingEntry transformedEntry = new TrackingEntry(searchTerm, result, trackingEntry.getRank(), trackingEntry.getCount());
 
         log.info("Converting (" + trackingEntry + ") into (" + transformedEntry + ")");
 
