@@ -1,9 +1,11 @@
 package de.vawi.searchrelevanceanalyser.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 @Table
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class TrackingEntry {
     private String searchTerm;
     private String result;
@@ -15,11 +17,14 @@ public class TrackingEntry {
 
     public TrackingEntry() {}
 
-    public TrackingEntry(String searchTerm, String result, int rank, int count) {
+    public TrackingEntry(String searchTerm, int count) {
         this.searchTerm = searchTerm;
+        this.count = count;
+    }
+    public TrackingEntry(String searchTerm, String result, int rank, int count) {
+        this(searchTerm, count);
         this.result = result;
         this.rank = rank;
-        this.count = count;
     }
 
     public String getSearchTerm() {
