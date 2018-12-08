@@ -2,7 +2,7 @@ package de.vawi.searchrelevanceanalyser.controller;
 
 import de.vawi.searchrelevanceanalyser.analyser.KlickAnalyser;
 import de.vawi.searchrelevanceanalyser.dao.TrackingEntryRepository;
-import de.vawi.searchrelevanceanalyser.model.StatisticalEntry;
+import de.vawi.searchrelevanceanalyser.model.SearchRankins;
 import de.vawi.searchrelevanceanalyser.model.TrackingEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,9 +23,9 @@ public class StatisticalController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping("/statistics/all")
-    public Map<String, List<StatisticalEntry>> getAll() {
+    public List<SearchRankins> getAll() {
         KlickAnalyser statistics = new KlickAnalyser(trackingEntryRepository.findAll());
-        return statistics.getSearchTermValues();
+        return statistics.getSearchRankings();
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
