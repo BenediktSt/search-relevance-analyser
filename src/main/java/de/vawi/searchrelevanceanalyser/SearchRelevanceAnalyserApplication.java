@@ -49,9 +49,9 @@ public class SearchRelevanceAnalyserApplication implements CommandLineRunner {
         System.out.println(average.getAverageValues());
 
         KlickAnalyser statistics = new KlickAnalyser(saveList);
-        System.out.println(statistics.getSearchTermValues());
+        System.out.println(statistics.getSearchRankings());
 
-        statistics.getSearchTermValues().forEach((term, values) -> {
+        /*statistics.getSearchRankings().forEach((term, values) -> {
             List<Integer> relevantRanks = RelevanceAnalyser.getRelevantRanksForTerm(values, average.getAverageValues());
             if (relevantRanks.size() > 0) {
                 System.out.print(term + ": ");
@@ -60,6 +60,6 @@ public class SearchRelevanceAnalyserApplication implements CommandLineRunner {
                 });
                 System.out.println();
             }
-        });
+        });*/
     }
 }

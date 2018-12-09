@@ -22,6 +22,7 @@ public class KlickAnalyser {
         List<String> searchTerms = this.trackingEntries
                 .stream()
                 .map(TrackingEntry::getSearchTerm)
+                .distinct()
                 .collect(Collectors.toList());
 
         searchTerms.forEach(searchTerm -> {
