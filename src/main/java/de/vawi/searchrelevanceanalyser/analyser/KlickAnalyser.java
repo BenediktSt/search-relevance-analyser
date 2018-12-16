@@ -7,6 +7,8 @@ import de.vawi.searchrelevanceanalyser.model.TrackingEntry;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 public class KlickAnalyser {
     private List<TrackingEntry> trackingEntries;
     private List<SearchRankins> searchRankings;
@@ -14,16 +16,14 @@ public class KlickAnalyser {
     public KlickAnalyser(List<TrackingEntry> trackingEntries) {
         this.trackingEntries = trackingEntries;
         this.searchRankings = new ArrayList<>();
-        this.generateList();
-        this.searchRankings.sort(Comparator.comparing(SearchRankins::getSearchTerm));
     }
 
-    private void generateList() {
+    public KlickAnalyser generateList(boolean includeResults) {
         List<String> searchTerms = this.trackingEntries
                 .stream()
                 .map(TrackingEntry::getSearchTerm)
                 .distinct()
-                .collect(Collectors.toList());
+                .collect(toList());
 
         searchTerms.forEach(searchTerm -> {
             List<StatisticalEntry> stats = new ArrayList<>();
@@ -39,9 +39,25 @@ public class KlickAnalyser {
                     .collect(Collectors.groupingBy(
                             TrackingEntry::getRank,
                             Collectors.collectingAndThen(Collectors.summingDouble(x -> 1), x -> x / total)))
-                .forEach((key, value) -> stats.add(new StatisticalEntry(key, value)));
+                    .forEach((key, value) -> stats.add(
+                            new StatisticalEntry(key, value)));
             this.searchRankings.add(new SearchRankins(searchTerm, stats));
         });
+        this.searchRankings.sort(Comparator.comparing(SearchRankins::getSearchTerm));
+        if (includeResults) {
+            this.searchRankings.forEach(entry -> {
+                        entry.getRankings().forEach(ranking -> {
+                            ranking.setResult(
+                                    trackingEntries
+                                            .stream()
+                                            .filter(track ->
+                                                    track.getSearchTerm().equals(entry.getSearchTerm()) && track.getRank() == ranking.getRank())
+                                            .collect(toList()).get(0).getResult());
+                        });
+                    }
+            );
+        }
+        return this;
     }
 
     public List<SearchRankins> getSearchRankings() {

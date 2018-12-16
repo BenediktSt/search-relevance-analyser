@@ -26,14 +26,18 @@ public class StatisticalController {
     @RequestMapping("/statistics/all")
     public List<SearchRankins> getAll() {
         KlickAnalyser statistics = new KlickAnalyser(trackingEntryRepository.findAll());
-        return statistics.getSearchRankings();
+        return statistics
+                .generateList(false)
+                .getSearchRankings();
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping("/statistics/{searchTerm}")
     public SearchRankins getBySearchTerm(@PathVariable String searchTerm) {
         KlickAnalyser statistics = new KlickAnalyser(trackingEntryRepository.findBySearchTerm(searchTerm));
-        return statistics.getSearchRankings().get(0);
+        return statistics
+                .generateList(true)
+                .getSearchRankings().get(0);
     }
 
 
